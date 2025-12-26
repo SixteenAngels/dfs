@@ -1,4 +1,5 @@
 #include "dfs_entropy.h"
+#include "dfs.h"
 #include <string.h>
 
 // Example placeholder implementation for Huffman encoding/decoding

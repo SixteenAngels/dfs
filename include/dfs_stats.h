@@ -6,13 +6,16 @@
 #include <time.h>
 
 typedef struct {
-    size_t original_size;
-    size_t compressed_size;
-    float ratio;
+    size_t total_input_bytes;
+    size_t total_output_bytes;
+    double compression_ratio;
     float compression_time_ms;
 } dfs_stats_t;
 
-void dfs_init_stats(dfs_stats_t* stats);
-void dfs_calculate_stats(dfs_stats_t* stats, size_t original, size_t compressed, clock_t start, clock_t end);
+void dfs_stats_reset(void);
+void dfs_stats_update_input(size_t bytes);
+void dfs_stats_update_output(size_t bytes);
+void dfs_stats_record_compression(double ratio);
+void dfs_stats_get(dfs_stats_t* out);
 
 #endif // DFS_STATS_H

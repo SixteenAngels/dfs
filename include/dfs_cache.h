@@ -3,15 +3,27 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "dfs.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void dfs_cache_init(size_t size);
-void dfs_cache_store(uint32_t hash, uint32_t offset);
-int  dfs_cache_lookup(uint32_t hash, uint32_t* offset);
-void dfs_cache_clear(void);
+typedef struct {
+    uint32_t key;
+    uint32_t value;
+} dfs_cache_entry_t;
+
+typedef struct {
+    uint32_t magic;
+    size_t size;
+    dfs_cache_entry_t* entries;
+} dfs_cache_t;
+
+int dfs_cache_init(dfs_cache_t* cache, size_t size);
+int dfs_cache_put(dfs_cache_t* cache, uint32_t key, uint32_t value);
+int dfs_cache_get(dfs_cache_t* cache, uint32_t key, uint32_t* value_out);
+void dfs_cache_free(dfs_cache_t* cache);
 
 #ifdef __cplusplus
 }

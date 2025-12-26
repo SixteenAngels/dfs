@@ -7,9 +7,15 @@
 extern "C" {
 #endif
 
-void dfs_perf_start(void);
-void dfs_perf_end(void);
-double dfs_perf_get_seconds(void);
+typedef struct {
+    double start;
+    double end;
+    double elapsed;
+} dfs_timer_t;
+
+void dfs_timer_start(dfs_timer_t* timer);
+void dfs_timer_stop(dfs_timer_t* timer);
+double dfs_timer_elapsed(const dfs_timer_t* timer);
 
 #ifdef __cplusplus
 }

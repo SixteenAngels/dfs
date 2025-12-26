@@ -1,5 +1,7 @@
 // dfs_block.c
 #include "dfs_block.h"
+#include "dfs.h"
+#include "dfs_format.h"
 #include "dfs_config.h"
 #include "dfs_utils.h"
 #include <string.h>

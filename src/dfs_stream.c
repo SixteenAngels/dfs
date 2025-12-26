@@ -66,3 +66,24 @@ void dfs_stream_close(dfs_stream_t* s) {
     if (s->file) fclose(s->file);
     free(s);
 }
+
+// Helper functions for reading/writing specific types
+uint8_t dfs_stream_read_u8(dfs_stream_t* stream) {
+    uint8_t value = 0;
+    dfs_stream_read(stream, &value, 1);
+    return value;
+}
+
+uint16_t dfs_stream_read_u16(dfs_stream_t* stream) {
+    uint16_t value = 0;
+    dfs_stream_read(stream, &value, 2);
+    return value;
+}
+
+void dfs_stream_write_u8(dfs_stream_t* stream, uint8_t value) {
+    dfs_stream_write(stream, &value, 1);
+}
+
+void dfs_stream_write_u16(dfs_stream_t* stream, uint16_t value) {
+    dfs_stream_write(stream, &value, 2);
+}

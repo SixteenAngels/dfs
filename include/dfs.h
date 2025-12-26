@@ -24,6 +24,9 @@ typedef enum {
     DFS_ERR_COMPRESSION_FAILED,
     DFS_ERR_DECOMPRESSION_FAILED,
     DFS_ERR_FILE_IO,
+    DFS_ERR_MEM_ALLOC,
+    DFS_ERR_THREAD_FAIL,
+    DFS_ERR_INVALID_FORMAT,
     DFS_ERR_UNKNOWN
 } dfs_status_t;
 
@@ -41,7 +44,7 @@ typedef enum {
  *
  * @return DFS_OK or an error code
  */
-int dfs_compress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size);
+dfs_status_t dfs_compress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size);
 
 /**
  * Decompress data from memory buffer
@@ -53,7 +56,7 @@ int dfs_compress(const uint8_t* input, size_t input_size, uint8_t* output, size_
  *
  * @return DFS_OK or an error code
  */
-int dfs_decompress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size);
+dfs_status_t dfs_decompress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size);
 
 // =======================
 // Optional File-based APIs
@@ -67,7 +70,7 @@ int dfs_decompress(const uint8_t* input, size_t input_size, uint8_t* output, siz
  *
  * @return DFS_OK or an error code
  */
-int dfs_compress_file(const char* input_path, const char* output_path);
+dfs_status_t dfs_compress_file(const char* input_path, const char* output_path);
 
 /**
  * Decompress an input file and write to output file
@@ -77,7 +80,7 @@ int dfs_compress_file(const char* input_path, const char* output_path);
  *
  * @return DFS_OK or an error code
  */
-int dfs_decompress_file(const char* input_path, const char* output_path);
+dfs_status_t dfs_decompress_file(const char* input_path, const char* output_path);
 
 #ifdef __cplusplus
 }

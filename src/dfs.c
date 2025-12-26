@@ -13,13 +13,13 @@
 // ========================
 // In-memory Compression
 // ========================
-int dfs_compress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size) {
+dfs_status_t dfs_compress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size) {
     if (!input || !output || !output_size || input_size == 0) {
         DFS_LOG_ERROR("Invalid parameters to dfs_compress");
         return DFS_ERR_INVALID_INPUT;
     }
 
-    int status = dfs_compress_buffer(input, input_size, output, output_size);
+    dfs_status_t status = dfs_compress_buffer(input, input_size, output, output_size);
     if (status != DFS_OK) {
         DFS_LOG_ERROR("Compression failed with status: %d", status);
         return status;
@@ -32,13 +32,13 @@ int dfs_compress(const uint8_t* input, size_t input_size, uint8_t* output, size_
 // ========================
 // In-memory Decompression
 // ========================
-int dfs_decompress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size) {
+dfs_status_t dfs_decompress(const uint8_t* input, size_t input_size, uint8_t* output, size_t* output_size) {
     if (!input || !output || !output_size || input_size == 0) {
         DFS_LOG_ERROR("Invalid parameters to dfs_decompress");
         return DFS_ERR_INVALID_INPUT;
     }
 
-    int status = dfs_decompress_buffer(input, input_size, output, output_size);
+    dfs_status_t status = dfs_decompress_buffer(input, input_size, output, output_size);
     if (status != DFS_OK) {
         DFS_LOG_ERROR("Decompression failed with status: %d", status);
         return status;
@@ -51,7 +51,7 @@ int dfs_decompress(const uint8_t* input, size_t input_size, uint8_t* output, siz
 // ========================
 // File-based Compression
 // ========================
-int dfs_compress_file(const char* input_path, const char* output_path) {
+dfs_status_t dfs_compress_file(const char* input_path, const char* output_path) {
     if (!input_path || !output_path) {
         DFS_LOG_ERROR("Invalid file paths for compression");
         return DFS_ERR_INVALID_INPUT;
@@ -63,7 +63,7 @@ int dfs_compress_file(const char* input_path, const char* output_path) {
 // ========================
 // File-based Decompression
 // ========================
-int dfs_decompress_file(const char* input_path, const char* output_path) {
+dfs_status_t dfs_decompress_file(const char* input_path, const char* output_path) {
     if (!input_path || !output_path) {
         DFS_LOG_ERROR("Invalid file paths for decompression");
         return DFS_ERR_INVALID_INPUT;
